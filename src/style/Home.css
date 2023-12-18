@@ -1,0 +1,41 @@
+.card{
+    width: 140%;
+}
+
+.w{
+    width: 100%;
+}
+
+.addfont{
+    display: flex;
+/* width: 123.025px; */
+padding: 0px 5px;
+align-items: center;
+font-size: xx-large;
+background-color: #E1BABABF;
+gap: 25px;
+height: 30px;
+}
+
+.addfont span{
+    width: 24px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 24px;
+    flex-shrink: 0;
+    background-color: #FFFFFFA1;
+}
+
+@media screen and (min-width: 600px) {
+    .ro{
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 2rem;
+    }
+
+    .card{
+        width: 18rem;
+    }
+}

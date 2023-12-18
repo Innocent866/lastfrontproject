@@ -1,0 +1,24 @@
+.div1 .add{
+    border: none;
+    border-radius: 0.5rem;
+    background-color: black;
+    color: white;
+    width: 100%;
+    padding:  5px 1rem;
+    margin: 0.5rem 0;
+}
+
+.div2{
+    background: #F9F2F2;
+}
+
+@media screen and (min-width: 600px) {
+    .div2{
+        width: 600px;
+
+    }
+
+    .div1 .add{
+        width: 15rem;
+    }
+}
