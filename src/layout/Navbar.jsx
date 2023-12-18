@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import navlogo from '../assets/Navlogo.jpg'
 import locationlogo from '../assets/locationlogo.jpg'
 import profilelogo from '../assets/profilelogo.jpg'
@@ -8,8 +8,11 @@ import { Link, Outlet } from 'react-router-dom'
 import Cart from '../pages/Cart'
 import SignCart from '../pages/SignCart'
 import axios from 'axios'
+import CartContext from '../context/CartContext'
+// import ''
 
 const Navbar = () => {
+  const {cart} = useContext(CartContext)
     const [show, setShow] = useState (false)
     const [ showing, setShowing ] = useState(false)
 
@@ -63,7 +66,9 @@ const Navbar = () => {
 
       <div>
         <div onClick={()=>(!show ? setShow(true) :setShow(false))}>
+        <p className='position-absolute bg-danger rounded-pill px-2 end-0 text-white'>{cart.length}</p>
             <img src={packagelogo}alt="" role='button' />
+           
         </div>
       </div>
  </section>
