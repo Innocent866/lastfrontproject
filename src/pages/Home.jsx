@@ -50,8 +50,8 @@ const Home = () => {
     <div className=''>
       {load && <Spinner animation="border" className='position-absolute top-50 start-50 text-danger'/>}
         <Hero/>
-       <div className='container d-flex justify-content-between my-5'>
-          <img src={jazzy} alt="" className='d-none d-lg-block w-25 me-5 me-md-3'/>
+       <div className='d-flex justify-content-between my-5'>
+          <img src={jazzy} alt="" className='d-none d-lg-block w-25 me- 2 me-md-3'/>
         <div className=' container row'>
                 {data.map((datum) => {
                 const {title,price,image,_id} = datum;
