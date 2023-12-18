@@ -50,13 +50,13 @@ const Home = () => {
     <div className=''>
       {load && <Spinner animation="border" className='position-absolute top-50 start-50 text-danger'/>}
         <Hero/>
-       <div className='d-flex my-5'>
+       <div className='d-flex justify-content-between my-5'>
           <img src={jazzy} alt="" className='d-none d-lg-block w-25 me-5 me-md-3'/>
         <div className=' container row'>
                 {data.map((datum) => {
                 const {title,price,image,_id} = datum;
                 return(
-                    <div key={_id} className='col-9 col-md-6 justify-content-between col-lg-4'>
+                    <div key={_id} className='col-9 col-md-6 justify-content-between  col-lg-4'>
                       <Card className='card' >
                     <Card.Img variant="top" src={image} className='w'/>
                     <Card.Body>

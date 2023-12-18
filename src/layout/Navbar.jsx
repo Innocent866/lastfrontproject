@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import navlogo from '../assets/Navlogo.jpg'
 import locationlogo from '../assets/locationlogo.jpg'
 import profilelogo from '../assets/profilelogo.jpg'
@@ -7,11 +7,29 @@ import productlogo from '../assets/productlogo.jpg'
 import { Link, Outlet } from 'react-router-dom'
 import Cart from '../pages/Cart'
 import SignCart from '../pages/SignCart'
+import axios from 'axios'
 
 const Navbar = () => {
     const [show, setShow] = useState (false)
     const [ showing, setShowing ] = useState(false)
 
+    const fetcher = async ()=>{
+      try {
+        const data = await axios('http://localhost:5757/api/user/getUserName',{
+          method: "GET",
+          headers: {
+            "content-type": "application/json"
+          }
+        })
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } 
+
+    useEffect(()=>{
+      fetcher()
+    })
   return (
     <main className='container position-relative'>
     <nav className='d-flex justify-content-between align-items-center gap-3'>
