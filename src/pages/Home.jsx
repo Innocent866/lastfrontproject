@@ -56,7 +56,7 @@ const Home = () => {
                 {data.map((datum) => {
                 const {title,price,image,_id} = datum;
                 return(
-                    <div key={_id} className='col-9 col-md-6 justify-content-between  col-lg-4'>
+                    <div key={_id} className='col-9 col-md-6 justify-content-between mb-3 col-lg-4'>
                       <Card className='card' >
                     <Card.Img variant="top" src={image} className='w'/>
                     <Card.Body>
