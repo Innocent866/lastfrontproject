@@ -13,7 +13,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [verifypassword, setVerifypassword] = useState('');
   const [phonenumber, setPhoneNumber] = useState('');
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   async function submit(e) {
     e.preventDefault();
@@ -37,6 +37,13 @@ const Signup = () => {
       });
       const responseData = await response.json();
     console.log(responseData);
+
+    if (responseData.message === "registration successfully") {
+      toast.success(responseData.message);
+      navigate("/Login")
+      return
+    }
+    
       if (responseData.message === "all fields are require to register") {
         toast.error(responseData.message);
         return
@@ -45,11 +52,7 @@ const Signup = () => {
         toast.error(responseData.message);
         return
       }
-      if (responseData.message === "registration successfully") {
-        toast.success(responseData.message);
-        return
-      }
-      navigate('/login')
+      
       if (responseData.message === "password and verifypassword must be the same") {
         toast.error(responseData.message);
         return
