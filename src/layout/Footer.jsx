@@ -63,10 +63,10 @@ const Footer = () => {
             <h5>FOLLOW US</h5>
         </div>
         <div className='d-flex gap-3'>
-            <img src={facebook} alt="" style={{width:"2rem"}} className='border border-1 border-white'/>
-            <img src={twitter} alt="" style={{width:"2rem"}} className='border border-1 border-white'/>
+            <img src={facebook} alt="" style={{width:"2rem", height:"2rem"}} className='border border-1 border-white'/>
+            <img src={twitter} alt="" style={{width:"2rem", height:"2rem"}} className='border border-1 border-white'/>
             <img src={instagram} alt="" style={{width:"2rem", height:"2rem"}} className='border border-1 border-white'/>
-            <img src={youtube} alt="" style={{width:"2rem"}} className='border border-1 border-white'/>
+            <img src={youtube} alt="" style={{width:"2rem", height:"2rem"}} className='border border-1 border-white'/>
 
         </div>
         </div>

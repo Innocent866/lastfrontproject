@@ -7,24 +7,27 @@ import productlogo from '../assets/productlogo.jpg'
 import { Link, Outlet } from 'react-router-dom'
 import Cart from '../pages/Cart'
 import SignCart from '../pages/SignCart'
-import axios from 'axios'
 import CartContext from '../context/CartContext'
-// import ''
 
 const Navbar = () => {
   const {cart} = useContext(CartContext)
+  const [ user, setUser  ] = useState(null)
     const [show, setShow] = useState (false)
     const [ showing, setShowing ] = useState(false)
+    const token = localStorage.getItem('token');
 
     const fetcher = async ()=>{
       try {
-        const data = await axios('http://localhost:5757/api/user/getUserName',{
+        const data = await fetch('https://gazzy.onrender.com/api/user/getUserName',{
           method: "GET",
           headers: {
-            "content-type": "application/json"
+            Authorization: `Bearer ${token}`,
+            "Content-type": "application/json"
           }
         })
-        console.log(data);
+        const response = await data.json()
+        console.log(response);
+        setUser(response.firstname)
       } catch (error) {
         console.log(error);
       }
@@ -32,7 +35,7 @@ const Navbar = () => {
 
     useEffect(()=>{
       fetcher()
-    })
+    },[])
   return (
     <main className='container position-relative'>
     <nav className='d-flex justify-content-between align-items-center gap-3'>
@@ -50,22 +53,21 @@ const Navbar = () => {
            <h5 className='d-none d-lg-block text-danger'>Lagos, Nigeria</h5>
  </section>
 
- <section className='d-flex justify-content-between align-items-center gap-3'>
+ <section className='d-flex justify-content-between align-items-center  gap-4'>
 
-   
-     <img src={productlogo} alt="" className='img-fluid'/>
-    
-
-
-      <h5 className='d-none d-lg-block mt-2 text-danger'>All products</h5>
-      <div className='d-flex gap-2' role='button'
+      <div className='d-flex gap-1'>
+      <img src={productlogo} alt="" className='img-fluid'/>
+     <h5 className='d-none d-lg-block mt-2 text-danger'>All products</h5>
+      </div>
+     
+      <div className='d-flex gap-1' role='button'
       onClick={()=>(!showing ? setShowing(true) : setShowing(false))}>
       <img src={profilelogo} alt="" />
-      <h5 className='d-none d-lg-block mt-2'>Hi, Guest</h5>
+      <h5 className='d-none d-lg-block mt-2'>Hi, {token ? <> {user} </> : <> Guest </>}</h5>
       </div>
 
       <div>
-        <div onClick={()=>(!show ? setShow(true) :setShow(false))}>
+        <div onClick={()=>(show ? setShow(false) : setShow(true))}>
         <p className='position-absolute bg-danger rounded-pill px-2 end-0 text-white'>{cart.length}</p>
             <img src={packagelogo}alt="" role='button' />
            

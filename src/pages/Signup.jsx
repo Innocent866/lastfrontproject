@@ -28,7 +28,7 @@ const Signup = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5757/api/user/registration", {
+      const response = await fetch("https://gazzy.onrender.com/api/user/registration", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

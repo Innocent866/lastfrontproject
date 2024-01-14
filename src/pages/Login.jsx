@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import logo from '../assets/Navlogo.jpg'
 import { Link } from 'react-router-dom'
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import CartContext from '../context/CartContext';
 
 const login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {setLoggedIn} = useContext(CartContext)
+  const navigate = useNavigate()
+  // localStorage.setItem('done','doings')
+
 
   async function login(e) {
     e.preventDefault()
@@ -16,7 +22,7 @@ const login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5757/api/user/login", {
+      const response = await fetch("https://gazzy.onrender.com/api/user/login", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -25,8 +31,14 @@ const login = () => {
       });
       const responseData = await response.json();
     console.log(responseData);
+    if (responseData.user.token) {
+      localStorage.setItem('token', responseData.user.token)
+      navigate('/')
+      setLoggedIn(true)
+    }
     if (responseData.message === "logged in") {
       toast.success(responseData.message);
+      navigate("/")
       return
     }
     if (responseData.message === 'all fields are required to login') {
@@ -38,8 +50,10 @@ const login = () => {
       return
     }
 
+  
+
     } catch (error) {
-      console.log(error.responseData);
+      console.log(error);
     }
   }
 
@@ -56,12 +70,12 @@ const login = () => {
                 <label htmlFor="" className='my-2'>Email:</label>
                 <input type="text" className='w-100 rounded p-3 ' value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 <label htmlFor="" className='my-2'>Password:</label>
-                <input type="text" className='w-100 rounded p-3 ' value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <input type="password" className='w-100 rounded p-3 ' value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 <div className='d-flex justify-content-between my-4'>
                    <div>
                    <input type="checkbox" /> <label htmlFor="">Keep me signed in</label>
                    </div>
-                   <Link to='/changePassword'>Reset Password</Link>
+                   <Link to='/forgotpassword'>Reset Password</Link>
                 </div>
                 <button className="btn btn-danger text-white w-100 my-3" onClick={login}>Sign In</button>
             </form>

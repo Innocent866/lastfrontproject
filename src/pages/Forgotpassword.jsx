@@ -1,38 +1,99 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import logo from "../assets/Navlogo.jpg";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
+// import axios from 'axios';
+import toast from "react-hot-toast";
 
-const Forgotpassword = () => {
+const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const forgotPasswordHandler = async (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const logInData = {
+      email,
+    };
+    try {
+      const data = await fetch(
+        "https://gazzy.onrender.com/api/user/forgotpassword",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(logInData),
+        }
+      );
+      const response = await data.json();
+      // setSuccess(data.data)
+      console.log(response);
+      if (response.success === true) {
+        toast.success(response.message);
+      }
 
-    const [email, setEmail] = useState('');
-    
+      if (response.success === false) {
+        setError(response.message);
+      }
+      setEmail("");
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    document.title = "forgot-password | Page";
+  });
   return (
-    <div className='container'>
-        <div className='d-flex justify-content-center align-items-center '>
-           <div className=''>
-          <div className="text-center mt-4 pb-5">
-          <Link to='/'><img src={logo} alt="" /></Link>
-           <h3>SIGN IN TO YOUR ACCOUNT</h3>
+    <>
+      <main className="container vh-50 d-flex flex-column  my-3  ">
+        <div className="">
+          <div className="text-center">
+            <Link to="/">
+              <img src={logo} alt="jazzy-logo" className="" />
+            </Link>
           </div>
-           <div className='mt-5'>
-            <form >
-                <label htmlFor="" className='my-2'>Email:</label>
-                <input type="text" className='w-100 rounded p-3 ' value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                <div className='d-flex justify-content-between my-4'>
-                   <div>
-                   <input type="checkbox" /> <label htmlFor="">Keep me signed in</label>
-                   </div>
-                   <Link to='/changePassword'>Reset Password</Link>
-                </div>
-                <button className="btn btn-danger text-white w-100 my-3" onClick={login}>Sign In</button>
-            </form>
-           <div className="text-center d-flex justify-content-between  justify-content-lg-center ">
-           <h5>Dont have an account? </h5>
-            <Link to='/signup'><h5>Create One</h5></Link>
-           </div>
-           </div>
-           </div>
-        </div>
-    </div>
-  )
-}
+          <h2 className="fs-3 fw-bold my-4 text-center w-75 m-auto">
+            Forgot Password?
+          </h2>
+          {/* {error && <span>{error} </span>}
+          {success && <span> {success} </span>} */}
+          <p className="text-center">Let's help you recover your password</p>
 
-export default Forgotpassword
+          <Form className="w-75 m-auto" onSubmit={forgotPasswordHandler}>
+            <Form.Label className=" fs-6 text-secondary ">Email </Form.Label>
+
+            <FloatingLabel
+              controlId="floatingInput"
+              label="example@mail.com"
+              className="mb-3"
+            >
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                className="border border-3 rounded"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FloatingLabel>
+            {error && <span className="text-danger fst-italic">{error} </span>}
+
+            <button className="btn btn-danger w-100 fs-3">
+              Reset Password
+            </button>
+          </Form>
+        </div>
+      </main>
+    </>
+  );
+};
+
+export default ForgotPassword;

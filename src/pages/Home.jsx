@@ -13,6 +13,7 @@ import '../style/Home.css'
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import CartContext from '../context/CartContext';
+import axios from 'axios';
 
 
 const Home = () => {
@@ -39,13 +40,18 @@ const Home = () => {
   const getDate = async ()=>{
     try {
       setLoad(true)
-      let data = await fetch('http://localhost:5757/api/products');
+      const data = await fetch("https://gazzy.onrender.com/api/products",{
+        method:"GET",
+        headers:{
+          "Content-Type":"application/json"
+        }
+      });
       
-      let response = await data.json();
+      const response = await data.json();
       setData(response.product)
-      console.log(response);
+      console.log(response.product);
     } catch (error) {
-      console.log(response.error)
+      console.log(error)
     }finally{
       setLoad(false)
     }
@@ -78,7 +84,7 @@ const Home = () => {
                         <h4>N{price}</h4>
                       </div>
 
-                     <p className='addfont'>
+                     <p className='addfont d-flex px-2 align-items-center'>
                       <button className='btn' onClick={minus}>-</button>
                       {quantity}
                       <button className='btn' onClick={add}>+</button>
@@ -103,7 +109,6 @@ const Home = () => {
        </div>
 
     </div>
-  )
-}
+  )}
 
-export default Home
+export default Home;

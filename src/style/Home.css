@@ -7,10 +7,6 @@
 }
 
 .addfont{
-    display: flex;
-/* width: 123.025px; */
-padding: 0px 5px;
-align-items: center;
 font-size: xx-large;
 background-color: #E1BABABF;
 gap: 25px;

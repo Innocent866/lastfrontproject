@@ -57,7 +57,7 @@ const Bag = () => {
           <div className="d-flex justify-content-center">
           <hr />
             {cart.length > 0 ? (
-              <Link className="btn btn-success w-100">
+              <Link className="btn btn-success w-100" to='/CheckOut'>
                 proceed to Checkout
               </Link>
             ) : (
