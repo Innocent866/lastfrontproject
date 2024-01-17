@@ -36,7 +36,7 @@ const ResetPassword = () => {
             },
             body: JSON.stringify(logInData)});
             const response = await data.json()
-            // setSuccess(data.data)
+            setSuccess(data.data)
             console.log(response);
          
             if(response.success === true){
