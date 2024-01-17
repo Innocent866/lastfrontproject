@@ -12,11 +12,11 @@ const ForgotPassword = () => {
   const [success, setSuccess] = useState("");
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
     const logInData = {
       email,
     };
@@ -64,8 +64,8 @@ const ForgotPassword = () => {
           <h2 className="fs-3 fw-bold my-4 text-center w-75 m-auto">
             Forgot Password?
           </h2>
-          {/* {error && <span>{error} </span>}
-          {success && <span> {success} </span>} */}
+          {error && <span>{error} </span>}
+          {success && <span> {success} </span>}
           <p className="text-center">Let's help you recover your password</p>
 
           <Form className="w-75 m-auto" onSubmit={forgotPasswordHandler}>
